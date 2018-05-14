@@ -47,16 +47,12 @@ PRODUCT_COPY_FILES += \
     device/generic/car/common/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    android.car.drawer.unlimited=true \
-    android.car.hvac.demo=true \
-    com.android.car.radio.demo=true \
-    com.android.car.radio.demo.dual=true
+    android.car.hvac.demo=true
 
 TARGET_USES_CAR_FUTURE_FEATURES := true
 
 # Add car related sepolicy.
 BOARD_SEPOLICY_DIRS += \
     device/generic/car/common/sepolicy \
-    packages/services/Car/car_product/sepolicy
 
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
