@@ -14,9 +14,6 @@
 # limitations under the License.
 #
 
-# TODO Remove this when AAE is fully treble ready
-PRODUCT_FULL_TREBLE_OVERRIDE := false
-
 # Auto modules
 PRODUCT_PACKAGES += \
     android.hardware.automotive.vehicle@2.0-service
@@ -50,9 +47,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     android.car.hvac.demo=true
 
 TARGET_USES_CAR_FUTURE_FEATURES := true
-
-# Add car related sepolicy.
-BOARD_SEPOLICY_DIRS += \
-    device/generic/car/common/sepolicy \
 
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
