@@ -328,6 +328,7 @@ static void out_apply_gain(struct generic_stream_out *out, const void *buffer, s
 
 static ssize_t out_write(struct audio_stream_out *stream, const void *buffer, size_t bytes) {
     struct generic_stream_out *out = (struct generic_stream_out *)stream;
+    ALOGV("%s: to device %s", __func__, out->bus_address);
     const size_t frames =  bytes / audio_stream_out_frame_size(stream);
 
     pthread_mutex_lock(&out->lock);
@@ -726,6 +727,17 @@ static int in_standby(struct audio_stream *stream) {
     return 0;
 }
 
+#define STEP (3.14159265 / 180)
+// Generates pure tone for FM_TUNER
+static int pseudo_pcm_read(void *data, unsigned int count) {
+    unsigned int length = count / sizeof(short);
+    short *sdata = (short *)data;
+    for (int index = 0; index < length; index++) {
+        sdata[index] = (short)(sin(index * STEP) * 4096);
+    }
+    return count;
+}
+
 static void *in_read_worker(void *args) {
     struct generic_stream_in *in = (struct generic_stream_in *)args;
     struct pcm *pcm = NULL;
@@ -818,7 +830,10 @@ static ssize_t in_read(struct audio_stream_in *stream, void *buffer, size_t byte
     if (in->worker_standby) {
         in->worker_standby = false;
     }
-    pthread_cond_signal(&in->worker_wake);
+    // FM_TUNER fills the buffer via pseudo_pcm_read directly
+    if (in->device != AUDIO_DEVICE_IN_FM_TUNER) {
+        pthread_cond_signal(&in->worker_wake);
+    }
 
     int64_t current_position;
     struct timespec current_time;
@@ -853,7 +868,10 @@ static ssize_t in_read(struct audio_stream_in *stream, void *buffer, size_t byte
     }
     in->standby_frames_read += frames;
 
-    if (popcount(in->req_config.channel_mask) == 1 &&
+    if (in->device == AUDIO_DEVICE_IN_FM_TUNER) {
+        int read_bytes = pseudo_pcm_read(buffer, bytes);
+        read_frames = read_bytes / audio_stream_in_frame_size(stream);
+    } else if (popcount(in->req_config.channel_mask) == 1 &&
         in->pcm_config.channels == 2) {
         // Need to resample to mono
         if (in->stereo_to_mono_buf_size < bytes*2) {
