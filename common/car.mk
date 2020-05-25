@@ -65,11 +65,14 @@ PRODUCT_COPY_FILES += \
 
 # Whitelisted packages per user type
 PRODUCT_COPY_FILES += \
-  device/generic/car/common/preinstalled-packages-product-car-emulator.xml:product/etc/sysconfig/preinstalled-packages-product-car-emulator.xml
+  device/generic/car/common/preinstalled-packages-product-car-emulator.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/preinstalled-packages-product-car-emulator.xml
 
 # Number of pre-created users
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES := \
     android.car.number_pre_created_users=1 \
     android.car.number_pre_created_guests=1
+
+# Additional selinux policy
+BOARD_SEPOLICY_DIRS += device/generic/car/common/sepolicy
 
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
