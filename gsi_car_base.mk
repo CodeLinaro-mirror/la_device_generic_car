@@ -16,6 +16,9 @@
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
 
+# TODO(b/193056430): Improve this temp fix for "artifact path requirement"
+#                    errors.
+# TODO(b/194941497): SHIPSTOP - remove CarServiceModule & android.car.module
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     root/init.bootstat.rc \
     root/init.car.rc \
@@ -41,6 +44,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/bin/carpowerpolicyd \
     system/bin/carwatchdogd \
     system/bin/com.android.car.procfsinspector \
+    system/bin/vehicle_binding_util \
     system/etc/apns-conf.xml \
     system/etc/init/android.automotive.evs.manager@1.1.rc \
     system/etc/init/carbugreportd.rc \
@@ -49,6 +53,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/init/com.android.car.procfsinspector.rc \
     system/etc/init/init.bootstat.car.rc \
     system/etc/init/init.car.rc \
+    system/etc/init/vehicle_binding_util.rc \
     system/etc/old-apns-conf.xml \
     system/etc/permissions/android.car.cluster.xml \
     system/etc/permissions/android.car.usb.handler.xml \
@@ -67,6 +72,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/permissions/com.android.car.settings.xml \
     system/etc/permissions/com.android.car.shell.xml \
     system/etc/permissions/com.android.car.xml \
+    system/etc/permissions/com.google.android.car.adaslocation.xml \
     system/etc/permissions/com.google.android.car.defaultstoragemonitoringcompanionapp.xml \
     system/etc/permissions/com.google.android.car.garagemode.testapp.xml \
     system/etc/permissions/com.google.android.car.kitchensink.xml \
@@ -76,6 +82,8 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/vintf/manifest/carwatchdogd.xml \
     system/etc/vintf/manifest/manifest_android.automotive.evs.manager@1.1.xml \
     system/framework/android.car.jar \
+    system/framework/android.car.builtin.jar \
+    system/framework/android.car.module.jar \
     system/framework/car-frameworks-service.jar \
     system/framework/oat/arm64/car-frameworks-service.odex \
     system/framework/oat/arm64/car-frameworks-service.vdex \
@@ -110,10 +118,16 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/priv-app/CarRadioApp/CarRadioApp.apk \
     system/priv-app/CarRotaryController/CarRotaryController.apk \
     system/priv-app/CarService/CarService.apk \
-    system/priv-app/CarService/lib/arm64/libscriptexecutorjni.so \
-    system/priv-app/CarService/lib/x86_64/libscriptexecutorjni.so \
+    system/app/CarServiceUpdatable/lib/arm64/libscriptexecutorjni.so \
+    system/app/CarServiceUpdatable/lib/x86_64/libscriptexecutorjni.so \
     system/priv-app/CarService/oat/arm64/CarService.odex \
     system/priv-app/CarService/oat/arm64/CarService.vdex \
+    system/app/CarServiceModule/CarServiceModule.apk \
+    system/app/CarServiceModule/oat/arm64/CarServiceModule.odex \
+    system/app/CarServiceModule/oat/arm64/CarServiceModule.vdex \
+    system/app/CarServiceUpdatable/CarServiceUpdatable.apk \
+    system/app/CarServiceUpdatable/oat/arm64/CarServiceUpdatable.odex \
+    system/app/CarServiceUpdatable/oat/arm64/CarServiceUpdatable.vdex \
     system/priv-app/CarSettings/CarSettings.apk \
     system/priv-app/CarShell/CarShell.apk \
     system/priv-app/CarShell/oat/arm64/CarShell.odex \
@@ -132,19 +146,24 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/priv-app/ExperimentalCarService/ExperimentalCarService.apk \
     system/priv-app/ExperimentalCarService/oat/arm64/ExperimentalCarService.odex \
     system/priv-app/ExperimentalCarService/oat/arm64/ExperimentalCarService.vdex \
+    system/priv-app/AdasLocationTestApp/AdasLocationTestApp.apk \
     system/priv-app/GarageModeTestApp/GarageModeTestApp.apk \
     system/priv-app/LocalMediaPlayer/LocalMediaPlayer.apk \
     system/priv-app/NetworkPreferenceApp/NetworkPreferenceApp.apk \
     system/lib64/libcarservicejni.so \
-    system/priv-app/CarService/lib/arm64/libcarservicejni.so \
-    system/priv-app/CarService/lib/x86_64/libcarservicejni.so \
+    system/app/CarServiceUpdatable/lib/arm64/libcarservicejni.so \
+    system/app/CarServiceUpdatable/lib/x86_64/libcarservicejni.so \
+    system/lib64/libscriptexecutor.so \
+    system/lib64/libscriptexecutorjni.so \
+    system/app/CarServiceUpdatable/lib/arm64/libscriptexecutorjni.so \
+    system/app/CarServiceUpdatable/lib/x86_64/libscriptexecutorjni.so \
     system/bin/android.automotive.telemetryd@1.0 \
     system/etc/init/android.automotive.telemetryd@1.0.rc \
     system/etc/vintf/manifest/android.automotive.telemetryd@1.0.xml \
     system/lib64/android.automotive.telemetryd@1.0-impl.so \
     system/lib64/android.frameworks.automotive.telemetry-V1-cpp.so \
-    system/lib64/android.automotive.telemetry.internal-ndk_platform.so \
-    system/lib64/android.frameworks.automotive.telemetry-V1-ndk_platform.so \
+    system/lib64/android.automotive.telemetry.internal-ndk.so \
+    system/lib64/android.frameworks.automotive.telemetry-V1-ndk.so \
     system/etc/automotive/watchdog/system_resource_overuse_configuration.xml \
     system/etc/automotive/watchdog/third_party_resource_overuse_configuration.xml \
     system/bin/android.frameworks.automotive.display@1.0-service \

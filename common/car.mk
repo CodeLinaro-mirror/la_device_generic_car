@@ -17,7 +17,7 @@
 # Auto modules
 # TODO: Add broadcastradio@.2.0 back once it's stable b/145694104
 PRODUCT_PACKAGES += \
-    android.hardware.automotive.vehicle@2.0-service \
+    android.hardware.automotive.vehicle@2.0-emulator-service \
     android.hardware.audio.service-caremu
 
 # Emulator configuration
@@ -89,3 +89,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_release.mk)
 endif
 
 $(call inherit-product, packages/services/Car/car_product/build/car.mk)
+$(call inherit-product, packages/apps/Car/Templates/CarTemplatesHost.mk)
