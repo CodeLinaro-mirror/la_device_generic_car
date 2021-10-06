@@ -18,7 +18,7 @@ PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
 
 # TODO(b/193056430): Improve this temp fix for "artifact path requirement"
 #                    errors.
-# TODO(b/194941497): SHIPSTOP - remove CarServiceModule & android.car.module
+# TODO(b/194941497): SHIPSTOP - remove CarServiceModule
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     root/init.bootstat.rc \
     root/init.car.rc \
@@ -38,6 +38,9 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/app/SampleRearViewCamera/SampleRearViewCamera.apk \
     system/app/SampleRearViewCamera/oat/arm64/SampleRearViewCamera.odex \
     system/app/SampleRearViewCamera/oat/arm64/SampleRearViewCamera.vdex \
+    system/app/ScriptExecutor/ScriptExecutor.apk \
+    system/app/ScriptExecutor/lib/arm64/libscriptexecutorjni.so \
+    system/app/ScriptExecutor/lib/x86_64/libscriptexecutorjni.so \
     system/app/SystemUpdater/SystemUpdater.apk \
     system/bin/android.automotive.evs.manager@1.1 \
     system/bin/carbugreportd \
@@ -59,6 +62,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/permissions/android.car.usb.handler.xml \
     system/etc/permissions/android.hardware.broadcastradio.xml \
     system/etc/permissions/android.hardware.type.automotive.xml \
+    system/etc/permissions/car-frameworks-service.xml \
     system/etc/permissions/com.android.car.activityresolver.xml \
     system/etc/permissions/com.android.car.bugreport.xml \
     system/etc/permissions/com.android.car.carlauncher.xml \
@@ -83,10 +87,12 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/vintf/manifest/manifest_android.automotive.evs.manager@1.1.xml \
     system/framework/android.car.jar \
     system/framework/android.car.builtin.jar \
-    system/framework/android.car.module.jar \
     system/framework/car-frameworks-service.jar \
     system/framework/oat/arm64/car-frameworks-service.odex \
     system/framework/oat/arm64/car-frameworks-service.vdex \
+    system/framework/car-frameworks-service-module.jar \
+    system/framework/oat/arm64/car-frameworks-service-module.odex \
+    system/framework/oat/arm64/car-frameworks-service-module.vdex \
     system/lib/libcar-framework-service-jni.so \
     system/lib/libsuspend.so \
     system/lib64/android.automotive.watchdog-V3-cpp.so \
