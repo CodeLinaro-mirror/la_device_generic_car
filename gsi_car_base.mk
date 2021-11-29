@@ -22,6 +22,7 @@ PRODUCT_PACKAGES += android.frameworks.automotive.display@1.0-service
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     root/init.bootstat.rc \
     root/init.car.rc \
+    system/apex/com.android.car.framework.apex \
     system/app/CarFrameworkPackageStubs/CarFrameworkPackageStubs.apk \
     system/app/CarFrameworkPackageStubs/oat/arm64/CarFrameworkPackageStubs.odex \
     system/app/CarFrameworkPackageStubs/oat/arm64/CarFrameworkPackageStubs.vdex \
@@ -119,6 +120,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/priv-app/CarDialerApp/CarDialerApp.apk \
     system/priv-app/CarHvacApp/CarHvacApp.apk \
     system/priv-app/CarLauncher/CarLauncher.apk \
+    system/priv-app/CarManagedProvisioning/CarManagedProvisioning.apk \
     system/priv-app/CarMediaApp/CarMediaApp.apk \
     system/priv-app/CarMessengerApp/CarMessengerApp.apk \
     system/priv-app/CarRadioApp/CarRadioApp.apk \
@@ -128,9 +130,6 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/app/CarServiceUpdatable/lib/x86_64/libscriptexecutorjni.so \
     system/priv-app/CarService/oat/arm64/CarService.odex \
     system/priv-app/CarService/oat/arm64/CarService.vdex \
-    system/app/CarServiceModule/CarServiceModule.apk \
-    system/app/CarServiceModule/oat/arm64/CarServiceModule.odex \
-    system/app/CarServiceModule/oat/arm64/CarServiceModule.vdex \
     system/app/CarServiceUpdatable/CarServiceUpdatable.apk \
     system/app/CarServiceUpdatable/oat/arm64/CarServiceUpdatable.odex \
     system/app/CarServiceUpdatable/oat/arm64/CarServiceUpdatable.vdex \
