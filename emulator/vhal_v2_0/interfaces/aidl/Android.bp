@@ -31,7 +31,7 @@ aidl_interface {
     versions_with_info: [
         {
             version: "1",
-            imports: ["android.hardware.automotive.vehicle-V1"],
+            imports: ["android.hardware.automotive.vehicle-V2"],
         },
     ],
 
