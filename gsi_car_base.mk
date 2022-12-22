@@ -38,7 +38,6 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/app/SampleCustomInputService/SampleCustomInputService.apk \
     system/app/SampleRearViewCamera/SampleRearViewCamera.apk \
     system/app/SystemUpdater/SystemUpdater.apk \
-    system/bin/android.automotive.evs.manager@1.1 \
     system/bin/canhalconfigurator \
     system/bin/canhalctrl \
     system/bin/canhaldump \
@@ -61,6 +60,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/init/evsmanagerd.rc \
     system/etc/init/init.bootstat.car.rc \
     system/etc/init/init.car.rc \
+    system/etc/init/init.evs.rc \
     system/etc/init/vehicle_binding_util.rc \
     system/etc/old-apns-conf.xml \
     system/etc/permissions/android.car.cluster.xml \
@@ -91,6 +91,7 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/etc/permissions/com.google.android.car.networking.railway.xml \
     system/etc/sysconfig/preinstalled-packages-product-car-base.xml \
     system/etc/sysconfig/preinstalled-packages-com.android.car.dialer.xml \
+    system/etc/sysconfig/preinstalled-packages-com.android.car.messenger.xml \
     system/etc/vintf/manifest/carpowerpolicyd.xml \
     system/etc/vintf/manifest/carwatchdogd.xml \
     system/etc/vintf/manifest/manifest_android.automotive.evs.manager@1.1.xml \
@@ -153,6 +154,8 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/priv-app/RotaryIME/RotaryIME.apk \
     system/priv-app/RotaryPlayground/RotaryPlayground.apk \
     system/lib64/libcarservicejni.so \
+    system/lib/libcarservicehelperjni.so \
+    system/lib64/libcarservicehelperjni.so \
     system/bin/android.automotive.telemetryd@1.0 \
     system/etc/init/android.automotive.telemetryd@1.0.rc \
     system/etc/vintf/manifest/android.automotive.telemetryd@1.0.xml \
@@ -165,6 +168,9 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
     system/bin/android.frameworks.automotive.display@1.0-service \
     system/etc/init/android.frameworks.automotive.display@1.0-service.rc \
     system/etc/vintf/manifest/manifest_android.frameworks.automotive.display@1.0.xml \
+    system/app/MultiDisplayTest/MultiDisplayTest.apk \
+    system/etc/permissions/com.android.car.multidisplay.xml \
+    system/priv-app/MultiDisplaySecondaryHomeTestLauncher/MultiDisplaySecondaryHomeTestLauncher.apk \
 
 PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += %.odex %.vdex %.art
 
