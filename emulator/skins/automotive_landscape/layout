@@ -19,11 +19,6 @@ parts {
       height 792
     }
   }
-  landscape {
-    background {
-      image back.png
-    }
-  }
 }
 layouts {
   landscape {
