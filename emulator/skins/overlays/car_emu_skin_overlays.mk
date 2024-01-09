@@ -16,6 +16,8 @@
 
 # Overlays for skins
 PRODUCT_PACKAGES += \
+    CarEmulationAutomotiveRoundOverlay \
     CarEmulationAutomotiveUltrawideOverlay \
     CarSystemUIEmulationutomotiveLargePortraitOverlay \
+    CarSystemUIEmulationutomotiveRoundOverlay \
     CarSystemUIEmulationutomotiveUltrawideOverlay
