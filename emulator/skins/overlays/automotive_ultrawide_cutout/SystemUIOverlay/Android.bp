@@ -19,7 +19,7 @@ package {
 }
 
 android_app {
-    name: "CarSystemUIEmulationutomotiveUltrawideOverlay",
+    name: "CarSystemUIEmulationutomotiveUltrawideCutoutOverlay",
     resource_dirs: ["res"],
     certificate: "platform",
     platform_apis: true,
