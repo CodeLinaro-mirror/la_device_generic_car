@@ -66,9 +66,6 @@ PRODUCT_SYSTEM_PROPERTIES += cppd.connectvhal.Timeoutmillis=60000
 PRODUCT_COPY_FILES += \
     device/generic/car/common/android.hardware.disable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
     device/generic/car/common/car_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/car_core_hardware.xml \
-    device/generic/car/common/android.hardware.disable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.ar.xml \
-    device/generic/car/common/android.hardware.disable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.autofocus.xml \
-    device/generic/car/common/android.hardware.disable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.any.xml \
     device/generic/car/common/android.hardware.disable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
     device/generic/car/common/android.hardware.disable.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
 
@@ -96,14 +93,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.broadcastradio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.broadcastradio.xml \
     frameworks/native/data/etc/android.hardware.type.automotive.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.type.automotive.xml \
 
-# Sensor features
+# Additional sensor features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml \
-    frameworks/native/data/etc/android.hardware.sensor.accelerometer_limited_axes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer_limited_axes.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope_limited_axes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope_limited_axes.xml \
-    frameworks/native/data/etc/android.hardware.sensor.accelerometer_limited_axes_uncalibrated.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer_limited_axes_uncalibrated.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope_limited_axes_uncalibrated.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope_limited_axes_uncalibrated.xml \
     frameworks/native/data/etc/android.hardware.sensor.heading.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.heading.xml \
 
 # Additional selinux policy
@@ -143,20 +136,21 @@ $(call inherit-product, device/generic/car/emulator/cluster/cluster-hwserviceman
 endif # BUILD_EMULATOR_CLUSTER_DISPLAY
 endif # EMULATOR_DYNAMIC_MULTIDISPLAY_CONFIG
 
-# Should use car bluetooth.prop.
-# This replaces value from device/generic/goldfish/product/generic.mk below
-ifeq (,$(ENABLE_CAR_USB_PASSTHROUGH))
-ENABLE_CAR_USB_PASSTHROUGH := false
-endif
-ifeq (true,$(ENABLE_CAR_USB_PASSTHROUGH))
-TARGET_PRODUCT_PROP := device/generic/car/emulator/usbpt/bluetooth/bluetooth.prop
-endif
+# Do no use bluetooth.prop from device/generic/goldfish/product/generic.mk below
+# TARGET_PRODUCT_PROP must be set to *something* so that the check in goldfish's
+# generic.mk will skip over adding the phone-centric Bluetooth properties. Use
+# TARGET_SYSTEM_PROP instead if goldfish ever updates this check, as it would be
+# better to place this in system.prop instead
+TARGET_PRODUCT_PROP := device/generic/car/emulator/bluetooth/bluetooth.prop
 
 # Disable biometrics for AAOS emulators
 EMULATOR_VENDOR_NO_BIOMETRICS := true
 
-# Disable camera for AAOS emulators
-EMULATOR_VENDOR_NO_CAMERA := true
+# Enable Camera for AAOS emulators unless explicitly disabled
+EMULATOR_VENDOR_NO_CAMERA ?= false
+ifeq (false,$(EMULATOR_VENDOR_NO_CAMERA))
+ENABLE_CAMERA_SERVICE := true
+endif
 
 # Goldfish vendor partition configurations
 $(call inherit-product, device/generic/goldfish/product/generic.mk)
